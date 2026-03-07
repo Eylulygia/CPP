@@ -10,11 +10,11 @@ public:
 
     bool isEmpty() const;
 
-    void setFirstName(const std::string &value);
-    void setLastName(const std::string &value);
-    void setNickname(const std::string &value);
-    void setPhoneNumber(const std::string &value);
-    void setDarkestSecret(const std::string &value);
+    void setFirstName(const std::string &name);
+    void setLastName(const std::string &name);
+    void setNickname(const std::string &name);
+    void setPhoneNumber(const std::string &name);
+    void setDarkestSecret(const std::string &name);
 
     const std::string &getFirstName() const;
     const std::string &getLastName() const;

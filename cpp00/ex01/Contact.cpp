@@ -7,32 +7,32 @@ Contact::Contact()
 
 bool Contact::isEmpty() const
 {
-    return _firstName.empty();
+    return _firstName.empty() && _lastName.empty();
 }
 
-void Contact::setFirstName(const std::string &value)
+void Contact::setFirstName(const std::string &name)
 {
-    _firstName = value;
+    _firstName = name;
 }
 
-void Contact::setLastName(const std::string &value)
+void Contact::setLastName(const std::string &name)
 {
-    _lastName = value;
+    _lastName = name;
 }
 
-void Contact::setNickname(const std::string &value)
+void Contact::setNickname(const std::string &name)
 {
-    _nickname = value;
+    _nickname = name;
 }
 
-void Contact::setPhoneNumber(const std::string &value)
+void Contact::setPhoneNumber(const std::string &name)
 {
-    _phoneNumber = value;
+    _phoneNumber = name;
 }
 
-void Contact::setDarkestSecret(const std::string &value)
+void Contact::setDarkestSecret(const std::string &name)
 {
-    _darkestSecret = value;
+    _darkestSecret = name;
 }
 
 const std::string &Contact::getFirstName() const

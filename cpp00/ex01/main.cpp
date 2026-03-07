@@ -13,7 +13,7 @@ static bool readField(const std::string &label, std::string &out)
 			return false;
 		if (!out.empty())
 			return true;
-		std::cout << "  Field cannot be empty. Try again." << std::endl;
+		std::cout << "Field cannot be empty. Try again." << std::endl;
 	}
 }
 
@@ -45,7 +45,7 @@ static void searchContact(const PhoneBook &phoneBook)
 {
 	if (phoneBook.size() == 0)
 	{
-		std::cout << "  PhoneBook is empty." << std::endl;
+		std::cout << "PhoneBook is empty." << std::endl;
 		return;
 	}
 	std::cout << "------------------------------------------" << std::endl;
@@ -57,7 +57,9 @@ static void searchContact(const PhoneBook &phoneBook)
 		return;
 	std::istringstream iss(line);
 	int idx = 0;
-	if (!(iss >> idx) || idx < 1 || static_cast<std::size_t>(idx) > phoneBook.size())
+	char leftover;
+	if (!(iss >> idx) || (iss >> leftover) || idx < 1
+		|| static_cast<std::size_t>(idx) > phoneBook.size())
 	{
 		std::cout << "  Invalid index." << std::endl;
 		return;
@@ -85,7 +87,7 @@ int main()
 		else if (command == "EXIT")
 			break;
 		else if (!command.empty())
-			std::cout << "  Unknown command. Use ADD, SEARCH or EXIT." << std::endl;
+			std::cout << "Unknown command. Use ADD, SEARCH or EXIT." << std::endl;
 	}
 	return 0;
 }
