@@ -87,8 +87,14 @@ static void searchContact(const PhoneBook &phoneBook)
 	phoneBook.showContact(static_cast<std::size_t>(idx - 1));
 }
 
-int main()
+int main(int argc, char **argv)
 {
+	(void)argv;
+	if (argc > 1)
+	{
+		std::cerr << "Usage: ./phonebook" << std::endl;
+		return 1;
+	}
 	PhoneBook phoneBook;
 	std::string command;
 
