@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	for (int i = 1; i < argc; i++)
 	{
 		std::string word = argv[i];
-		for (std::string:: j = 0; j < word.size(); j++)
+		for (std::string::size_type j = 0; j < word.size(); j++)
 	    	std::cout << (char)std::toupper(word[j]);
 	}
 	std::cout << std::endl;
