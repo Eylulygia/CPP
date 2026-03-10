@@ -4,6 +4,17 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
+static bool isAsciiPrintable(const std::string &str)
+{
+	for (std::size_t i = 0; i < str.length(); ++i)
+	{
+		unsigned char c = static_cast<unsigned char>(str[i]);
+		if (c < 32 || c > 126)
+			return false;
+	}
+	return true;
+}
+
 static bool readField(const std::string &label, std::string &out)
 {
 	while (true)
@@ -11,9 +22,17 @@ static bool readField(const std::string &label, std::string &out)
 		std::cout << label;
 		if (!std::getline(std::cin, out))
 			return false;
-		if (!out.empty())
-			return true;
-		std::cout << "Field cannot be empty. Try again." << std::endl;
+		if (out.empty())
+		{
+			std::cout << "Field cannot be empty. Try again." << std::endl;
+			continue;
+		}
+		if (!isAsciiPrintable(out))
+		{
+			std::cout << "Only ASCII characters allowed (no accented/special characters). Try again." << std::endl;
+			continue;
+		}
+		return true;
 	}
 }
 
