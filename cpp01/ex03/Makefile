@@ -1,0 +1,30 @@
+NAME		= violence
+CXX			= c++
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+RM			= rm -f
+
+SRCS		= main.cpp \
+			  Weapon.cpp \
+			  HumanA.cpp \
+			  HumanB.cpp
+
+OBJS		= $(SRCS:.cpp=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	@echo "\n⚔️ Violence initialized: $(NAME)\n"
+
+%.o: %.cpp Weapon.hpp HumanA.hpp HumanB.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
