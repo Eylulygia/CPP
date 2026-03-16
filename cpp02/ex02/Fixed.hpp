@@ -15,7 +15,7 @@ public:
     Fixed(const int n);
     Fixed(const float f);
     Fixed(const Fixed& src);
-    Fixed& operator=(const Fixed& rhs);
+    Fixed& operator=(const Fixed& target);
     ~Fixed();
 
     // Raw bits accessors
@@ -27,18 +27,18 @@ public:
     int toInt(void) const;
 
     // Comparison operators
-    bool operator>(const Fixed& rhs) const;
-    bool operator<(const Fixed& rhs) const;
-    bool operator>=(const Fixed& rhs) const;
-    bool operator<=(const Fixed& rhs) const;
-    bool operator==(const Fixed& rhs) const;
-    bool operator!=(const Fixed& rhs) const;
+    bool operator>(const Fixed& target) const;
+    bool operator<(const Fixed& target) const;
+    bool operator>=(const Fixed& target) const;
+    bool operator<=(const Fixed& target) const;
+    bool operator==(const Fixed& target) const;
+    bool operator!=(const Fixed& target) const;
 
     // Arithmetic operators
-    Fixed operator+(const Fixed& rhs) const;
-    Fixed operator-(const Fixed& rhs) const;
-    Fixed operator*(const Fixed& rhs) const;
-    Fixed operator/(const Fixed& rhs) const;
+    Fixed operator+(const Fixed& target) const;
+    Fixed operator-(const Fixed& target) const;
+    Fixed operator*(const Fixed& target) const;
+    Fixed operator/(const Fixed& target) const;
 
     // Increment/Decrement operators
     Fixed& operator++(void);       // Pre-increment
@@ -54,6 +54,6 @@ public:
 };
 
 // Stream operator
-std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
+std::ostream & operator<<(std::ostream & o, Fixed const & target);
 
 #endif

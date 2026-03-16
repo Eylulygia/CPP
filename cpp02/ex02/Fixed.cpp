@@ -1,6 +1,5 @@
 #include "Fixed.hpp"
 
-// Constructors & Destructor
 Fixed::Fixed() : _fixedPointValue(0) {}
 
 Fixed::Fixed(const int n) : _fixedPointValue(n << _fractionalBits) {}
@@ -11,16 +10,15 @@ Fixed::Fixed(const Fixed& src) {
     *this = src;
 }
 
-Fixed& Fixed::operator=(const Fixed& rhs) {
-    if (this != &rhs) {
-        this->_fixedPointValue = rhs.getRawBits();
+Fixed& Fixed::operator=(const Fixed& target) {
+    if (this != &target) {
+        this->_fixedPointValue = target.getRawBits();
     }
     return *this;
 }
 
 Fixed::~Fixed() {}
 
-// Raw bits
 int Fixed::getRawBits(void) const {
     return this->_fixedPointValue;
 }
@@ -29,7 +27,6 @@ void Fixed::setRawBits(int const raw) {
     this->_fixedPointValue = raw;
 }
 
-// Conversions
 float Fixed::toFloat(void) const {
     return (float)this->_fixedPointValue / (1 << _fractionalBits);
 }
@@ -38,36 +35,39 @@ int Fixed::toInt(void) const {
     return this->_fixedPointValue >> _fractionalBits;
 }
 
-// Comparison operators
-bool Fixed::operator>(const Fixed& rhs) const { return this->_fixedPointValue > rhs.getRawBits(); }
-bool Fixed::operator<(const Fixed& rhs) const { return this->_fixedPointValue < rhs.getRawBits(); }
-bool Fixed::operator>=(const Fixed& rhs) const { return this->_fixedPointValue >= rhs.getRawBits(); }
-bool Fixed::operator<=(const Fixed& rhs) const { return this->_fixedPointValue <= rhs.getRawBits(); }
-bool Fixed::operator==(const Fixed& rhs) const { return this->_fixedPointValue == rhs.getRawBits(); }
-bool Fixed::operator!=(const Fixed& rhs) const { return this->_fixedPointValue != rhs.getRawBits(); }
+// --- COMPARISON OPERATORS ---
 
-// Arithmetic operators
-Fixed Fixed::operator+(const Fixed& rhs) const {
+bool Fixed::operator>(const Fixed& target) const { return this->_fixedPointValue > target.getRawBits(); }
+bool Fixed::operator<(const Fixed& target) const { return this->_fixedPointValue < target.getRawBits(); }
+bool Fixed::operator>=(const Fixed& target) const { return this->_fixedPointValue >= target.getRawBits(); }
+bool Fixed::operator<=(const Fixed& target) const { return this->_fixedPointValue <= target.getRawBits(); }
+bool Fixed::operator==(const Fixed& target) const { return this->_fixedPointValue == target.getRawBits(); }
+bool Fixed::operator!=(const Fixed& target) const { return this->_fixedPointValue != target.getRawBits(); }
+
+// --- ARITHMETIC OPERATORS ---
+
+Fixed Fixed::operator+(const Fixed& target) const {
     Fixed res;
-    res.setRawBits(this->_fixedPointValue + rhs.getRawBits());
+    res.setRawBits(this->_fixedPointValue + target.getRawBits());
     return res;
 }
 
-Fixed Fixed::operator-(const Fixed& rhs) const {
+Fixed Fixed::operator-(const Fixed& target) const {
     Fixed res;
-    res.setRawBits(this->_fixedPointValue - rhs.getRawBits());
+    res.setRawBits(this->_fixedPointValue - target.getRawBits());
     return res;
 }
 
-Fixed Fixed::operator*(const Fixed& rhs) const {
-    return Fixed(this->toFloat() * rhs.toFloat());
+Fixed Fixed::operator*(const Fixed& target) const {
+    return Fixed(this->toFloat() * target.toFloat());
 }
 
-Fixed Fixed::operator/(const Fixed& rhs) const {
-    return Fixed(this->toFloat() / rhs.toFloat());
+Fixed Fixed::operator/(const Fixed& target) const {
+    return Fixed(this->toFloat() / target.toFloat());
 }
 
-// Increment / Decrement
+// --- INCREMENT / DECREMENT OPERATORS ---
+
 Fixed& Fixed::operator++(void) {
     this->_fixedPointValue++;
     return *this;
@@ -90,7 +90,8 @@ Fixed Fixed::operator--(int) {
     return tmp;
 }
 
-// Static min/max
+// --- STATIC MIN/MAX FUNCTIONS ---
+
 Fixed& Fixed::min(Fixed& a, Fixed& b) {
     return (a < b) ? a : b;
 }
@@ -107,8 +108,9 @@ const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
     return (a > b) ? a : b;
 }
 
-// Stream operator
-std::ostream & operator<<(std::ostream & o, Fixed const & rhs) {
-    o << rhs.toFloat();
+// --- STREAM OPERATOR ---
+
+std::ostream & operator<<(std::ostream & o, Fixed const & target) {
+    o << target.toFloat();
     return o;
 }

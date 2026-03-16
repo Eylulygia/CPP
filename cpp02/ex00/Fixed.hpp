@@ -9,13 +9,11 @@ private:
     static const int _fractionalBits = 8;
 
 public:
-    // Orthodox Canonical Form
-    Fixed();                            // Default constructor
-    Fixed(const Fixed& src);            // Copy constructor
-    Fixed& operator=(const Fixed& rhs); // Copy assignment operator
-    ~Fixed();                           // Destructor
+    Fixed();                            
+    Fixed(const Fixed& src);            
+    Fixed& operator=(const Fixed& rhs); 
+    ~Fixed();                           
 
-    // Member functions
     int getRawBits(void) const;
     void setRawBits(int const raw);
 };
